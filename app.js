@@ -13,8 +13,16 @@ const aboutContent =
   'Hac habitasse platea dictumst vestibulum rhoncus est pettentesque. Dictumst vestibulum rhoncus est pellentesque elit Mauris ultrices eros in cursus turpis massa tincidunt dui.Lacus vel facilisis volutpat est vetit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit ame luctus venenatis rectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio '
 const contactContent =
   'Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamt,Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut conse Lacus vel facilisis volutpat est vetit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit ame luctus venenatis rectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio '
-const compose =
-  'eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamt,Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut conse Lacus vel facilisis volutpat est vetit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit ame luctus venenatis rectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at.'
+
+class Post {
+  title
+  content
+  constructor(title, content) {
+    this.title = title
+    this.content = content
+  }
+}
+var posts=[]
 app.get('/', function (req, res) {
   res.render('home', { homeContent: homeStartingContent })
 })
@@ -25,12 +33,17 @@ app.get('/contact', function (req, res) {
   res.render('contact', { contactContent: contactContent })
 })
 app.get('/compose', function (req, res) {
-  res.render('compose', { composeContent: compose })
+  res.render('compose')
 })
 
 app.post('/compose', function (req, res) {
   const newPost = req.body.newPost
-  console.log(newPost)
+  const title =req.body.newTitle
+  const post = new Post(title, newPost)
+  posts.push(post)
+  console.log(
+    posts
+  )
 })
 
 app.listen(port, function () {
