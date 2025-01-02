@@ -11,10 +11,13 @@
     font-size: 12px;
     letter-spacing: 5px;
 }
-.navbar-nav li a:hover {
-    color:#1abc9c
-    ! important;
+.navbar{
+    background-color: rgb(227, 202, 171);
+    font-size: 1rem;
+    padding: 30px;
+    
 }
+
 .footer—padding {
     padding-bottom: 60px;
 }
@@ -31,4 +34,24 @@
     font-size: 16px;
     color: #fff;
     text-align: center;
+}
+
+a{
+    text-decoration: none;
+    margin: auto;
+    padding-right: 20px;
+    color: #000000;
+}
+a:hover{
+    color:#1abc9c
+    ! important;
+    text-decoration: none;
+    margin: auto;
+    padding-right: 20px;
+    
+}
+
+h1{
+    font-weight: 700;
+    
 }
