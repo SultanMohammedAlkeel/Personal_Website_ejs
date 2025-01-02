@@ -14,17 +14,14 @@ const aboutContent =
 const contactContent =
   'Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamt,Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut conse Lacus vel facilisis volutpat est vetit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit ame luctus venenatis rectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio '
 
-class Post {
-  title
-  content
-  constructor(title, content) {
-    this.title = title
-    this.content = content
-  }
-}
-var posts=[]
+var posts = [
+  {
+    title: 'Day 1',
+    post: 'Sit ame luctus venenatis rectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at.',
+  },
+]
 app.get('/', function (req, res) {
-  res.render('home', { homeContent: homeStartingContent })
+  res.render('home', { homeContent: homeStartingContent, posts: posts })
 })
 app.get('/about', function (req, res) {
   res.render('about', { aboutContent: aboutContent })
@@ -38,12 +35,13 @@ app.get('/compose', function (req, res) {
 
 app.post('/compose', function (req, res) {
   const newPost = req.body.newPost
-  const title =req.body.newTitle
-  const post = new Post(title, newPost)
+  const title = req.body.newTitle
+  const post = {
+    title: title,
+    post: newPost,
+  }
   posts.push(post)
-  console.log(
-    posts
-  )
+  res.redirect('/')
 })
 
 app.listen(port, function () {
