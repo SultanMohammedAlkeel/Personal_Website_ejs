@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const ejs = require('ejs')
+const _ = require('lodash')
 const app = express()
 const port = 3000
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -16,12 +17,16 @@ const contactContent =
 
 var posts = [
   {
-    title: 'Day 1',
+    title: 'day 1',
     post: 'Sit ame luctus venenatis rectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at.',
   },
 ]
 app.get('/', function (req, res) {
-  res.render('home', { homeContent: homeStartingContent, posts: posts })
+  res.render('home', {
+    homeContent: homeStartingContent,
+    posts: posts,
+    truncate: _.truncate,
+  })
 })
 app.get('/about', function (req, res) {
   res.render('about', { aboutContent: aboutContent })
@@ -43,7 +48,12 @@ app.post('/compose', function (req, res) {
   posts.push(post)
   res.redirect('/')
 })
-
+app.get('/posts/:topic', function (req, res) {
+  index = posts.find((post) => post.title == req.params.topic)
+  topicTitle = index.title
+  topicContent = index.post
+  res.render('post', { topic: topicTitle, topicContent: topicContent })
+})
 app.listen(port, function () {
   console.log('Server is running on port 3000')
 })
